@@ -1,5 +1,18 @@
 let pokemonList = [
-    {name: 'eevee', height: 2, types: ['normal', 'electric']}, 
-    {name: 'vulpix', height: 4, types: ['fire', 'dark']}, 
-    {name: 'gardevoir', height: 10, type: ['psychic', 'fairy']}
+    {
+        name: 'Oddish', 
+        height: 1.08, 
+        types: ['grass', 'poison']
+    }, 
+    {
+        name: 'Kakuna', 
+        height: 2.0, 
+        types: ['bug', 'poison']
+    }, 
+    {
+        name: 'Gardevoir', 
+        height: 5.03, 
+        type: ['psychic', 'fairy']
+    }
 ];
+
