@@ -1,5 +1,8 @@
 let pokemonList = [
     {
+let pokemonRepository = (function () {  // create IIFE
+
+    let pokemonList = [ {
         name: 'Oddish', 
         height: 1.08, 
         types: ['grass', 'poison']
@@ -14,10 +17,25 @@ let pokemonList = [
         height: 5.03, 
         type: ['psychic', 'fairy']
         types: ['psychic', 'fairy']
+    }];
+        
+    function add(pokemon) {
+        }
+    }
+
+    function getAll() {
+        return pokemonList;
     }
 ];
 
 pokemonList.forEach(function(pokemon) {
+    return {
+        add: add,
+        getAll: getAll
+    };
+
+})();
+
     
     document.write('<p>' + pokemon.name + ' (height: ' + pokemon.height + ')')
 
