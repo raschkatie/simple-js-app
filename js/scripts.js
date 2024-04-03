@@ -1,4 +1,4 @@
-let pokemonRepository = (function () {  // create IIFE
+let pokemonRepository = (function () {  // IIFE - create Pokemon array
 
     let pokemonList = [ {
         name: 'Oddish', 
@@ -15,12 +15,23 @@ let pokemonRepository = (function () {  // create IIFE
         height: 5.03, 
         types: ['psychic', 'fairy']
     }];
+
+    function isValidPokemon(pokemon) {  // make sure new Pokemon info is consistent
+        return (
+            typeof pokemon === 'object' &&
+            Object.keys(pokemon).length === 3 &&
+            'name' in pokemon &&
+            'height' in pokemon &&
+            'types' in pokemon &&
+            Array.isArray(pokemon.types)
+        );
+    }
         
     function add(pokemon) {
-        if (typeof pokemon === 'object') {
+        if (isValidPokemon(pokemon)) {
             pokemonList.push(pokemon);
         } else {
-            console.log('Error: Pokemon information is not correct');
+            console.log('Error: Pokemon information is incorrect');
         }
     }
 
