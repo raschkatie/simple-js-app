@@ -13,6 +13,7 @@ let pokemonList = [
         name: 'Gardevoir', 
         height: 5.03, 
         type: ['psychic', 'fairy']
+        types: ['psychic', 'fairy']
     }
 ];
 
