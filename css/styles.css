@@ -49,3 +49,27 @@ body {
     cursor: pointer;
 }
 
+/* mobile-friendly settings */
+@media all and (max-width: 500px) {
+    .button-class {
+        width: 80%;
+    }
+
+    .button-class:active {
+        text-decoration: none;
+        background-color: var(--secondary-color);
+        color: var(--accent-color);
+    }
+}
+
+@media all and (min-width: 500px) and (max-width: 750px) {
+    .button-class {
+        width: 70%;
+    }
+}
+
+@media all and (max-width: 750px) {
+    .button-class {
+        width: 70%;
+    }
+}
