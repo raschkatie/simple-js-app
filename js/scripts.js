@@ -1,5 +1,3 @@
-let pokemonList = [
-    {
 let pokemonRepository = (function () {  // create IIFE
 
     let pokemonList = [ {
@@ -15,7 +13,6 @@ let pokemonRepository = (function () {  // create IIFE
     {
         name: 'Gardevoir', 
         height: 5.03, 
-        type: ['psychic', 'fairy']
         types: ['psychic', 'fairy']
     }];
         
@@ -30,9 +27,7 @@ let pokemonRepository = (function () {  // create IIFE
     function getAll() {
         return pokemonList;
     }
-];
 
-pokemonList.forEach(function(pokemon) {
     return {
         add: add,
         getAll: getAll
