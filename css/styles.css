@@ -1,0 +1,51 @@
+:root {
+    --background-color: #98c8de;
+    --primary-color: #645aa4;
+    --secondary-color: #313167;
+    --darker-background: #5c7fd0;
+    --accent-color: #b986d7;
+    --main-font-size: 20px;
+    --font-bold: 700;
+    --transition-speed: 0.3s;
+    --transition-speed-slow: 0.5s;
+}
+
+body {
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    font-size: var(--main-font-size);
+    background-color: var(--background-color);
+    line-height: 1.6;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.button-class {
+    border: none;
+    display: inline-block;
+    font-family: inherit;
+    font-size: var(--main-font-size);
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    width: 15%;
+    margin: 7px 0px;
+    border-radius: 15px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    transition-property: background-color, color;
+    transition-duration: var(--transition-speed);
+}
+
+.pokemon-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.button-class:hover, .button-class:focus {
+    text-decoration: none;
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+    cursor: pointer;
+}
+
