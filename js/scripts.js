@@ -20,6 +20,10 @@ let pokemonRepository = (function () {  // create IIFE
     }];
         
     function add(pokemon) {
+        if (typeof pokemon === 'object') {
+            pokemonList.push(pokemon);
+        } else {
+            console.log('Error: Pokemon information is not correct');
         }
     }
 
