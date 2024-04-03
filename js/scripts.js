@@ -40,6 +40,7 @@ pokemonList.forEach(function(pokemon) {
 
 })();
 
+pokemonRepository.getAll().forEach(function(pokemon) {
     
     document.write('<p>' + pokemon.name + ' (height: ' + pokemon.height + ')')
 
