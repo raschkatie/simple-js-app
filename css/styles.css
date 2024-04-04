@@ -11,7 +11,6 @@
     --transition-speed-slow: 0.5s;
 }
 
-/* global styles */
 body {
     font-family: 'Lora', serif;
     font-weight: 400;
@@ -22,9 +21,14 @@ body {
     text-align: center;
 }
 
-div {
+#loadingMessage {
+    background-color: var(--background-color);
     font-weight: 400;
     font-size: var(--main-font-size);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
 }
 
 /* list / buttons */
