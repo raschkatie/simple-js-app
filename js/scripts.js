@@ -2,31 +2,17 @@
 let pokemonRepository = (function () {  
 
     // create Pokemon array
-    let pokemonList = [ {
-        name: 'Oddish', 
-        height: 1.08, 
-        types: ['grass', 'poison']
-    }, 
-    {
-        name: 'Kakuna', 
-        height: 2.0, 
-        types: ['bug', 'poison']
-    }, 
-    {
-        name: 'Gardevoir', 
-        height: 5.03, 
-        types: ['psychic', 'fairy']
-    }];
+    let pokemonList = [];
+    // access API with Pokemon database
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-    // make sure new Pokemon info is consistent
+    // make sure new Pokemon info is correct and consistent
     function isValidPokemon(pokemon) {  
         return (
             typeof pokemon === 'object' &&
-            Object.keys(pokemon).length === 3 &&
+            Object.keys(pokemon).length === 2 &&
             'name' in pokemon &&
-            'height' in pokemon &&
-            'types' in pokemon &&
-            Array.isArray(pokemon.types)
+            'detailsUrl' in pokemon
         );
     }
         
@@ -35,7 +21,7 @@ let pokemonRepository = (function () {
         if (isValidPokemon(pokemon)) {
             pokemonList.push(pokemon);
         } else {
-            console.log('Error: Pokemon information is incorrect');
+            console.log('Error: ' + pokemon.name + ' information is incorrect');
         }
     }
 
@@ -63,21 +49,65 @@ let pokemonRepository = (function () {
 
     }
 
-    // show Pokemon details on button click
-    function showDetails(pokemon) {
-        console.log(pokemon);
+    // load API / Pokemon database
+    function loadList() {
+        showLoadingMessage();
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function(json) {
+            json.results.forEach(function(item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+                hideLoadingMessage();
+            });
+        }).catch(function(e) {
+            console.error(e);
+        })
     }
 
+    // fetch specific details for Pokemon
+    function loadDetails(item) {
+        showLoadingMessage();
+        let url = item.detailsUrl;
+        return fetch(url).then(function(response) {
+            return response.json();
+        }).then(function(details) {
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+            hideLoadingMessage();
+        }).catch(function(e) {
+            console.error(e);
+        });
+    }
+
+    // show Pokemon details on button click
+    function showDetails(pokemon) {
+        loadDetails(pokemon).then(function() {
+            console.log(pokemon);
+        });
+    }
+
+    // 'exports' all functions in IIFE
     return {
         add: add,
         getAll: getAll,
-        addListItem: addListItem
+        addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails
     };
 
 })();
 
-// forEach loop - goes through full Pokemon array
-pokemonRepository.getAll().forEach(function(pokemon) {  
-    pokemonRepository.addListItem(pokemon);
+// forEach loop - loads list, then goes through full Pokemon array
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach(function(pokemon) {  
+        pokemonRepository.addListItem(pokemon);
+    });
+});
+
 
 });
