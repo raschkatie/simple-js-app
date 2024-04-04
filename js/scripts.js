@@ -109,5 +109,10 @@ pokemonRepository.loadList().then(function() {
     });
 });
 
+function showLoadingMessage() {
+    document.getElementById('loadingMessage').style.display = 'block';
+}
 
-});
+function hideLoadingMessage() {
+    document.getElementById('loadingMessage').style.display = 'none';
+}
