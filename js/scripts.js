@@ -1,5 +1,7 @@
-let pokemonRepository = (function () {  // IIFE - create Pokemon array
+// IIFE
+let pokemonRepository = (function () {  
 
+    // create Pokemon array
     let pokemonList = [ {
         name: 'Oddish', 
         height: 1.08, 
@@ -16,7 +18,8 @@ let pokemonRepository = (function () {  // IIFE - create Pokemon array
         types: ['psychic', 'fairy']
     }];
 
-    function isValidPokemon(pokemon) {  // make sure new Pokemon info is consistent
+    // make sure new Pokemon info is consistent
+    function isValidPokemon(pokemon) {  
         return (
             typeof pokemon === 'object' &&
             Object.keys(pokemon).length === 3 &&
@@ -27,6 +30,7 @@ let pokemonRepository = (function () {  // IIFE - create Pokemon array
         );
     }
         
+    // adds pokemon to array if in valid format
     function add(pokemon) {
         if (isValidPokemon(pokemon)) {
             pokemonList.push(pokemon);
@@ -35,25 +39,31 @@ let pokemonRepository = (function () {  // IIFE - create Pokemon array
         }
     }
 
+    // 'exports' Pokemon array outside of IIFE
     function getAll() {
         return pokemonList;
     }
 
+    // Create list on page as buttons
     function addListItem(pokemon) {
         let pokemonList = document.querySelector('.pokemon-list');
         let listPokemon = document.createElement('li');
 
-        let button = document.createElement('button');  // create Pokemon button
+        // create Pokemon button
+        let button = document.createElement('button');  
         button.innerText = pokemon.name;
         button.classList.add('button-class');
 
-        listPokemon.appendChild(button);    // add button to page (as last child)
+        // add button to page (as last child)
+        listPokemon.appendChild(button);    
         pokemonList.appendChild(listPokemon);
 
+        // listen for button click
         button.addEventListener('click', () => showDetails(pokemon));
 
     }
 
+    // show Pokemon details on button click
     function showDetails(pokemon) {
         console.log(pokemon);
     }
@@ -66,7 +76,8 @@ let pokemonRepository = (function () {  // IIFE - create Pokemon array
 
 })();
 
-pokemonRepository.getAll().forEach(function(pokemon) {  // forEach loop - goes through full Pokemon array
+// forEach loop - goes through full Pokemon array
+pokemonRepository.getAll().forEach(function(pokemon) {  
     pokemonRepository.addListItem(pokemon);
 
 });
