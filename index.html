@@ -13,10 +13,20 @@
 
     <body>
         
-        <div id="loadingMessage" style="display: none;">Loading...</div>
+        <header class="page-header">
+            <nav class="main-navigation page-header__item">
+                <h1>Pokedex</h1>
+            </nav>
+        </header>
 
-        <ul class="pokemon-list"></ul>
 
+        <main>
+            <div id="loadingMessage" style="display: none;">Loading...</div>
+
+            <ul class="pokemon-list"></ul>
+
+            <div id="modal-container"></div>
+        </main>
 
         <!-- KEEP AT END OF BODY -->
         <script src="js/promise-polyfill"></script>
