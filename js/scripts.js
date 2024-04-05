@@ -114,7 +114,7 @@ let pokemonRepository = (function () {
         pokeHeight.innerText = 'Height: ' + pokemon.height;
 
         let pokeType = document.createElement('p');
-        pokeType.innerText = 'Types: ';
+        pokeType.innerText = 'Type(s): ';
 
         // grab each item from Pokemon type array
         pokemon.types.forEach((element) => {
