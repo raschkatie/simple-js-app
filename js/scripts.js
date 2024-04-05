@@ -4,7 +4,7 @@ let pokemonRepository = (function () {
     // create Pokemon array
     let pokemonList = [];
     // access API with Pokemon database
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=200';
 
     // make sure new Pokemon info is correct and consistent
     function isValidPokemon(pokemon) {  
@@ -84,14 +84,130 @@ let pokemonRepository = (function () {
         });
     }
 
-    // show Pokemon details on button click
-    function showDetails(pokemon) {
-        loadDetails(pokemon).then(function() {
-            console.log(pokemon);
+    // create and show modal
+    function showModal(pokemon) {
+
+        // find modal-container id and create blank HTML
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.innerHTML = '';
+
+        // create modal element
+        let modal = document.createElement('div');
+        modal.classList.add('modal');
+
+        // create closing button
+        let closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'X';
+        closeButtonElement.addEventListener('click', hideModal);
+
+        // create text / image elements for modal
+        let pokeName = document.createElement('h2');
+        pokeName.innerText = pokemon.name;
+
+        let pokePic = document.createElement('img');
+        pokePic.classList.add('pokemon-sprite');
+        pokePic.src = pokemon.imageUrl;
+        pokePic.alt = pokemon.name;
+
+        let pokeHeight = document.createElement('p');
+        pokeHeight.innerText = 'Height: ' + pokemon.height;
+
+        let pokeType = document.createElement('p');
+        pokeType.innerText = 'Types: ';
+
+        // grab each item from Pokemon type array
+        pokemon.types.forEach((element) => {
+            let pokeElement = document.createElement('button');
+            pokeElement.classList.add('pokemon-type');
+            pokeElement.innerText = element.type.name;
+
+            // adding class to each Pokemon type
+            if (element.type.name === 'grass') {
+                pokeElement.classList.add('grass-type');
+            } else if (element.type.name === 'fire') {
+                pokeElement.classList.add('fire-type');
+            } else if (element.type.name === 'water') {
+                pokeElement.classList.add('water-type');
+            } else if (element.type.name === 'normal') {
+                pokeElement.classList.add('normal-type');
+            } else if (element.type.name === 'psychic') {
+                pokeElement.classList.add('psychic-type');
+            } else if (element.type.name === 'fairy') {
+                pokeElement.classList.add('fairy-type');
+            } else if (element.type.name === 'ice') {
+                pokeElement.classList.add('ice-type');
+            } else if (element.type.name === 'poison') {
+                pokeElement.classList.add('poison-type');
+            } else if (element.type.name === 'ghost') {
+                pokeElement.classList.add('ghost-type');
+            } else if (element.type.name === 'dragon') {
+                pokeElement.classList.add('dragon-type');
+            } else if (element.type.name === 'electric') {
+                pokeElement.classList.add('electric-type');
+            } else if (element.type.name === 'steel') {
+                pokeElement.classList.add('steel-type');
+            } else if (element.type.name === 'bug') {
+                pokeElement.classList.add('bug-type');
+            } else if (element.type.name === 'dark') {
+                pokeElement.classList.add('dark-type');
+            } else if (element.type.name === 'flying') {
+                pokeElement.classList.add('flying-type');
+            } else if (element.type.name === 'ground') {
+                pokeElement.classList.add('ground-type');
+            } else if (element.type.name === 'rock') {
+                pokeElement.classList.add('rock-type');
+            } else if (element.type.name === 'fighting') {
+                pokeElement.classList.add('fighting-type');
+            } else {
+                pokeElement.classList.add('misc-type');
+            }
+
+            pokeType.appendChild(pokeElement);
+        });
+
+        // append / add elements to modal
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(pokePic);
+        modal.appendChild(pokeName);
+        modal.appendChild(pokeHeight);
+        modal.appendChild(pokeType);
+        modalContainer.appendChild(modal);
+
+        // add is-visible class to modal for toggling
+        modalContainer.classList.add('is-visible');
+
+        // event listener to hide modal when clicking outside of modal
+        modalContainer.addEventListener('click', (e) => {
+            let target = e.target;
+            if (target === modalContainer) {
+                hideModal();
+            }
         });
     }
 
-    // 'exports' all functions in IIFE
+    // create function to hide modal
+    function hideModal() {
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.classList.remove('is-visible');
+    }
+
+    // show Pokemon details in modal on button click
+    function showDetails(pokemon) {
+        loadDetails(pokemon).then(() => {
+            showModal(pokemon);
+        });   
+    }
+
+    // lets the user close the window by hitting Escape
+    window.addEventListener('keydown', (e) => {
+        let modalContainer = document.querySelector('#modal-container');
+        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+            hideModal();
+        }
+    });
+
+    // 'exports' functions in IIFE
     return {
         add: add,
         getAll: getAll,
@@ -103,12 +219,16 @@ let pokemonRepository = (function () {
 })();
 
 // forEach loop - loads list, then goes through full Pokemon array
-pokemonRepository.loadList().then(function() {
-    pokemonRepository.getAll().forEach(function(pokemon) {  
+pokemonRepository.loadList().then(() => {
+    pokemonRepository.getAll().forEach((pokemon) => {  
         pokemonRepository.addListItem(pokemon);
+
+
+
     });
 });
 
+// loading message functions
 function showLoadingMessage() {
     document.getElementById('loadingMessage').style.display = 'block';
 }
