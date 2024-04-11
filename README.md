@@ -13,7 +13,7 @@ This app utilizes a combination of:
 
 ## Resources
 
-The list of Pokémon was fetched from [PokéeAPI](https://pokeapi.co/).
+The list of Pokémon was fetched from [PokéAPI](https://pokeapi.co/).
 
 ## Website
 
