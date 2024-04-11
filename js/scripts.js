@@ -4,7 +4,7 @@ let pokemonRepository = (function () {
     // create Pokemon array
     let pokemonList = [];
     // access API with Pokemon database
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=200';
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     // make sure new Pokemon info is correct and consistent
     function isValidPokemon(pokemon) {  
@@ -54,7 +54,6 @@ let pokemonRepository = (function () {
 
     // load API / Pokemon database
     function loadList() {
-        // showLoadingMessage();
         return fetch(apiUrl).then(function (response) {
             return response.json();
         }).then(function(json) {
@@ -64,7 +63,6 @@ let pokemonRepository = (function () {
                     detailsUrl: item.url
                 };
                 add(pokemon);
-                // hideLoadingMessage();
             });
         }).catch(function(e) {
             console.error(e);
@@ -73,7 +71,6 @@ let pokemonRepository = (function () {
 
     // fetch specific details for Pokemon
     function loadDetails(item) {
-        // showLoadingMessage();
         let url = item.detailsUrl;
         return fetch(url).then(function(response) {
             return response.json();
@@ -81,7 +78,6 @@ let pokemonRepository = (function () {
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
             item.types = details.types;
-            // hideLoadingMessage();
         }).catch(function(e) {
             console.error(e);
         });
@@ -168,24 +164,7 @@ let pokemonRepository = (function () {
         modalHeader.appendChild(pokeName);
         modalBody.appendChild(pokeHeight);
         modalBody.appendChild(pokeType);
-        modalContainer.appendChild(modal);
 
-        // add is-visible class to modal for toggling
-        modalContainer.classList.add('is-visible');
-
-        // event listener to hide modal when clicking outside of modal
-        modalContainer.addEventListener('click', (e) => {
-            let target = e.target;
-            if (target === modalContainer) {
-                hideModal();
-            }
-        });
-    }
-
-    // create function to hide modal
-    function hideModal() {
-        let modalContainer = document.querySelector('.modal-fade');
-        modalContainer.classList.remove('is-visible');
     }
 
     // show Pokemon details in modal on button click
@@ -218,8 +197,6 @@ let pokemonRepository = (function () {
 pokemonRepository.loadList().then(() => {
     pokemonRepository.getAll().forEach((pokemon) => {  
         pokemonRepository.addListItem(pokemon);
-
-
 
     });
 });
