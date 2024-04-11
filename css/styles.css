@@ -29,7 +29,6 @@ body {
     top: 0;
     width: 100%;
     background-color: var(--secondary-color);
-    height: 100px;
     text-align: center;
     margin: auto;
     box-shadow: 5px 2px 2px rgba(0, 0, 0, 0.4);
@@ -37,19 +36,20 @@ body {
 
 .nav-item, a {
     margin-left: 25%;
-    color: var(--background-color);
+    color: var(--background-color) !important;
 }
 
 .nav-item:hover, a:hover {
-    color: var(--darker-background);
+    color: var(--darker-background) !important;
 }
 
 .nav-link.disabled {
-    color: var(--darker-background);
+    color: var(--darker-background) !important;
 }
 
 .navbar-toggler {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color) !important;
+    text-align: right;
 }
 
 /* Pokedex logo */
